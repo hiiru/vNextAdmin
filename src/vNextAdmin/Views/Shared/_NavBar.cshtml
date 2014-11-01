@@ -1,0 +1,22 @@
+﻿<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
+    </div>
+
+    <ul class="nav navbar-top-links navbar-right">
+        @await Component.InvokeAsync("NavTopDropdown")
+        @await Component.InvokeAsync("NavTopMenu")
+    </ul>
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+            @await Component.InvokeAsync("NavLeftMenu")
+        </div>
+    </div>
+</nav>
