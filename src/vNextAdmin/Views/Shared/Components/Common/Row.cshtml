@@ -1,0 +1,7 @@
+﻿@model vNextAdminLib.Components.Common.Row
+<div class="row">
+    @foreach(var child in Model.Children)
+    {
+        @await Component.InvokeAsync(child.ViewComponentIdentifier,child)
+    }
+</div>

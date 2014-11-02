@@ -9,14 +9,13 @@
         <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
     </div>
 
-    <ul class="nav navbar-top-links navbar-right">
-        @await Component.InvokeAsync("NavTopDropdown")
-        @await Component.InvokeAsync("NavTopMenu")
+    <ul class="nav navbar-top-links navbar-right pull-right">
+        @await Component.InvokeAsync("Navigation", "NavTop")
     </ul>
 
     <div class="navbar-default sidebar" role="navigation">
         <div class="sidebar-nav navbar-collapse">
-            @await Component.InvokeAsync("NavLeftMenu")
+            @await Component.InvokeAsync("Navigation", "NavLeft")
         </div>
     </div>
 </nav>

@@ -1,0 +1,17 @@
+﻿@model List<vNextAdminLib.Components.IAdminMenuEntry>
+<ul class="nav" id="side-menu">
+    @foreach (var item in Model)
+    {
+        @await Component.InvokeAsync(item.ViewComponentIdentifier, item)
+    }
+    @*<li class="sidebar-search">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </li>*@
+</ul>
