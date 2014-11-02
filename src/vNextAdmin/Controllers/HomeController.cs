@@ -77,6 +77,8 @@ namespace vNextAdmin.Controllers
             select.Values.Add("2", new SelectItem { Label = "Option B", Value = false, Disabled = true });
             select.Values.Add("3", new SelectItem { Label = "Last Option", Value = false, Selected=true });
             form.Children.Add(select);
+            form.Children.Add(new Button { ButtonCss = "btn btn-danger", Type = "submit", Label = "do NOT push the button" });
+            form.Children.Add(new Button { ButtonCss = "btn btn-primary", Type = "submit", Label = "good", Disabled=true });
             return View("Test", form);
         }
     }
