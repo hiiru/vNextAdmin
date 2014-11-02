@@ -1,0 +1,17 @@
+﻿@model vNextAdminLib.Components.Form.Option
+<div class="form-group @Model.GetStatusCss()">
+    @if (!string.IsNullOrWhiteSpace(Model.Label))
+    {
+        <label>@Model.Label</label>
+    }
+    @foreach (var item in Model.Values)
+    {
+        <div class="@Model.GetItemCss()">
+            <label><input name="@item.Key" @Html.Raw(item.Value.GetTagAttributes(Model.Checkboxes))> @item.Value.Label</label>
+        </div>
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.StatusText))
+    {
+        <p class="help-block">@Model.StatusText</p>
+    }
+</div>

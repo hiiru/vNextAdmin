@@ -1,0 +1,26 @@
+﻿@model vNextAdminLib.Components.Navigation.MenuItem
+@if (Model.Type == vNextAdminLib.Components.Navigation.MenuItemType.Divider)
+{
+    <li class="divider"></li>
+}
+else
+{
+<li @(Model.IsTopMenu ? Html.Raw("class=\"dropdown\"") : null)>
+    <a href="@Model.Target"@(Model.IsTopMenu ? Html.Raw(" data-toggle=\"dropdown\" class=\"dropdown-toggle\"") : null )>
+        <i class="fa fa-@Model.Icon fa-fw"></i> @Model.Label 
+        @if (Model.HasChildren)
+        {
+            <span class="fa @(Model.IsTopMenu?"fa-caret-down":"arrow")"></span>
+        }
+    </a>
+    @if (Model.HasChildren)
+    {
+        <ul class="@(Model.IsTopMenu?"dropdown-menu":"nav nav-second-level collapse")"> 
+        @foreach (var item in Model.Children)
+        {
+            @await Component.InvokeAsync(item.ViewComponentIdentifier, item)
+        }
+        </ul>
+    }
+</li>
+}
