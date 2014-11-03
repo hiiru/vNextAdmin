@@ -17,7 +17,7 @@ namespace vNextAdmin
     {
         public void Configure(IApplicationBuilder app)
         {
-            InitStaticContent(app);
+            app.UseStaticFiles();
 
             app.UseServices(services =>
             {
@@ -51,28 +51,9 @@ namespace vNextAdmin
                     name: "default",
                     template: "{*url}",
                     defaults: new { controller = "Generic", action = "Index" });
-
-                //routes.MapRoute(
-                //    name: "default",
-                //    template: "{controller}/{action}/{id?}",
-                //    defaults: new { controller = "Home", action = "Index" });
-
-                //routes.MapRoute(
-                //    name: "api",
-                //    template: "{controller}/{id?}");
             });
 
 
-        }
-
-
-        private void InitStaticContent(IApplicationBuilder app)
-        {
-            var staticContent = Path.Combine(AppContext.BaseDirectory, "wwwroot", "static");
-            app.UseStaticFiles(new StaticFileOptions {
-                FileSystem = new PhysicalFileSystem(staticContent),
-                RequestPath = new PathString("/static")
-            });
         }
     }
 }
