@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace vNextAdminLib.Components.Form
 {
-    public abstract class AFormComponent : IAdminPageItem
+    public abstract class AFormComponent : AAdminPageItem
     {
-        public bool AllowsChildren { get { return false; } }
-        public List<IAdminPageItem> Children { get { return null; } }
-        public string ViewComponentIdentifier { get { return "form"; } }
+        public override string ViewComponentIdentifier { get { return "form"; } }
 
-        public abstract string ViewComponentMethod { get; }
+        public string Name { get; set; }
         public bool Disabled { get; set; }
         public string StatusText { get; set; }
         public FormControlStatus Status { get; set; }

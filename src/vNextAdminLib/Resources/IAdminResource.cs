@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using vNextAdminLib.Components;
 
 namespace vNextAdminLib.Resources
 {
@@ -6,5 +8,7 @@ namespace vNextAdminLib.Resources
     {
         string Url { get; }
         AdminResourceType Type { get; }
+
+        List<IAdminPageItem> PageItems { get; }
     }
 }

@@ -1,0 +1,10 @@
+﻿@model List<vNextAdminLib.Components.IAdminPageItem>
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Test";
+    ViewBag.PageTitle = "Test form";
+}
+@foreach (var component in Model)
+{
+    @await Component.InvokeAsync(component.ViewComponentIdentifier, component)
+}

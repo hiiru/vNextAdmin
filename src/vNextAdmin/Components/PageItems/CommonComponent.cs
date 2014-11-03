@@ -17,6 +17,8 @@ namespace vNextAdmin.Components
                 {
                     case "row":
                         return await RenderRow(item);
+                    default:
+                        return View(item.ViewComponentMethod, item);
                 }
             return Content("");
         }

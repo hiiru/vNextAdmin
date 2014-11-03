@@ -1,0 +1,14 @@
+﻿@model vNextAdminLib.Components.Common.Alert
+<div class="@Html.Raw(Model.GetCssClasses())">
+    @if (Model.Dismissable) {
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    }
+    @if (Model.IsHtmlText)
+    {
+        @Html.Raw(Model.Text)
+    }
+    else
+    {
+        @Model.Text
+    }
+</div>

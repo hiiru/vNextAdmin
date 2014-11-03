@@ -1,0 +1,7 @@
+﻿@model vNextAdminLib.Components.Form.Fieldset
+<fieldset @Html.Raw(Model.GetTagAttributes())>
+    @foreach (var item in Model.Children)
+    {
+        @await Component.InvokeAsync(item.ViewComponentIdentifier, item)
+    }
+</fieldset>

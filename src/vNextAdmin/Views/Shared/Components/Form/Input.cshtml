@@ -13,17 +13,17 @@
             break;
         case vNextAdminLib.Components.Form.InputType.Textarea:
             {
-                <textarea class="form-control" rows="@Model.Rows" @Html.Raw(Model.GetTagAttributes())>
+                <textarea class="form-control" name="@Model.Name" rows="@Model.Rows" @Html.Raw(Model.GetTagAttributes())>
                     @Model.Value
                 </textarea>
-            }
-            break;
-        default:
-            {
-                <input class="form-control" value="@Model.Value" @Html.Raw(Model.GetTagAttributes())>
-            }
-            break;
-    }
+        }
+        break;
+    default:
+        {
+            <input class="form-control" name="@Model.Name" value="@Model.Value" @Html.Raw(Model.GetTagAttributes())>
+        }
+        break;
+}
     @if (!string.IsNullOrWhiteSpace(Model.StatusText))
     {
         <p class="help-block">@Model.StatusText</p>
