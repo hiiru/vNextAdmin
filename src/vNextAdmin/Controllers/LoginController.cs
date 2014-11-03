@@ -52,8 +52,7 @@ namespace vNextAdmin.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Route("/logout")]
         public IActionResult logOut()
         {
             SignInManager.SignOut();

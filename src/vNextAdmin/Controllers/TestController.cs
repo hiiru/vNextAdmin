@@ -5,14 +5,9 @@ using vNextAdminLib.Components.Dashboard;
 
 namespace vNextAdmin.Controllers
 { 
-    public class HomeController : AdminControllerBase
+    public class TestController : AdminControllerBase
     {
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Test()
         {
             var row = new Row();
             row.Children.Add(new CountPanel
@@ -55,7 +50,7 @@ namespace vNextAdmin.Controllers
 
             return View("Test", row);
         }
-        public IActionResult TestForm()
+        public IActionResult Form()
         {
             var form = new Form();
             form.Children.Add(new Input { Label = "Name", StatusText = "just ur damn. name !!!1111", Placholder = "your name here", Type = InputType.Text });

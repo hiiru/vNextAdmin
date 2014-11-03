@@ -43,15 +43,28 @@ namespace vNextAdmin
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "test",
+                    template: "Test/{action}/{id?}",
+                    defaults: new { controller = "Test", action = "Index" });
+
+                routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action}/{id?}",
-                    defaults: new { controller = "Home", action = "Index" });
+                    template: "{*url}",
+                    defaults: new { controller = "Generic", action = "Index" });
+
+                //routes.MapRoute(
+                //    name: "default",
+                //    template: "{controller}/{action}/{id?}",
+                //    defaults: new { controller = "Home", action = "Index" });
 
                 //routes.MapRoute(
                 //    name: "api",
                 //    template: "{controller}/{id?}");
             });
+
+
         }
+
 
         private void InitStaticContent(IApplicationBuilder app)
         {
