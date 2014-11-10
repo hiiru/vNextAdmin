@@ -4,7 +4,7 @@
 
 namespace vNextAdmin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AdminControllerBase : Controller
     {
     }

@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using vNextAdminLib.Components;
+using Microsoft.AspNet.Http;
+using System.Threading.Tasks;
 
 namespace vNextAdminLib.Resources
 {
     public interface IAdminResource
     {
-        string Url { get; }
-        AdminResourceType Type { get; }
+        string ResourceName { get; }
 
-        List<IAdminPageItem> PageItems { get; }
+        AdminResourceType Type { get; }
+        
+        object HandleRequest(HttpContext context);
     }
 }

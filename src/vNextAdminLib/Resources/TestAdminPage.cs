@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using vNextAdminLib.Components;
 using vNextAdminLib.Components.Common;
 using vNextAdminLib.Components.Form;
+using System.Threading.Tasks;
 
 namespace vNextAdminLib.Resources
 {
@@ -78,6 +79,20 @@ namespace vNextAdminLib.Resources
             pageItems.Add(formElement);
             return pageItems;
         }
+
+        public object HandleRequest(HttpContext context)
+        {
+            if (context.Request.Method == "POST")
+            {
+                var form = context.Request.GetFormAsync();
+                return Post(context.Request.QueryString, form.Result);
+            }
+            else
+            {
+                return Get(context.Request.QueryString);
+            }
+        }
+
         public TestAdminPageModel Model { get; set; }
 
         public List<IAdminPageItem> PageItems { get; protected set; }
@@ -85,6 +100,8 @@ namespace vNextAdminLib.Resources
         public AdminResourceType Type { get { return AdminResourceType.AdminPage; } }
 
         public string Url { get { return "/Admin/Test"; } }
+
+        public string ResourceName { get { return ""; } }
 
         public class TestAdminPageModel
         {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Mvc;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.AspNet.Mvc.ModelBinding;
+using System.Linq;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,23 +16,29 @@ namespace vNextAdmin.Controllers
             base.OnActionExecuting(context);
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string module, string resource)
         {
-            if (Context.Request.Path.StartsWithSegments(new Microsoft.AspNet.Http.PathString("/blackmarket")))
+            if (module == "Dashboard")
+                return View("Index");
+
+            //TODO: change this to a dynamic object which is injected
+            var modules = vNextAdminLib.StaticExampleData.GetModules();
+            var match = modules.FirstOrDefault(m => m.ModuleName == module);
+            if (match != null)
             {
-                var page = new vNextAdminLib.Resources.TestAdminPage();
-                if (Context.Request.Method == "POST")
+                var admResource = match.GetResource(resource, Context);
+                if (admResource != null)
                 {
-                    await TryUpdateModelAsync(page.Model);
-                    var form=Context.Request.GetFormAsync();
-                    return View("Page", page.Post(Context.Request.QueryString, await form));
-                }
-                else
-                {
-                    return View("Page", page.Get(Context.Request.QueryString));
+                    switch (admResource.Type)
+                    {
+                        case vNextAdminLib.Resources.AdminResourceType.AdminPage:
+                            return View("Page", admResource.HandleRequest(Context));
+
+                        case vNextAdminLib.Resources.AdminResourceType.API:
+                            return Json(admResource.HandleRequest(Context));
+                    }
                 }
             }
-
             return View("error");
         }
     }

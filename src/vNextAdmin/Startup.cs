@@ -10,6 +10,7 @@ using Microsoft.AspNet.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using Microsoft.Data.Entity;
 using vNextAdminLib.Data;
+using Microsoft.Framework.ConfigurationModel;
 
 namespace vNextAdmin
 {
@@ -17,6 +18,9 @@ namespace vNextAdmin
     {
         public void Configure(IApplicationBuilder app)
         {
+            var configuration = new Configuration();
+            configuration.AddJsonFile("config.json");
+
             app.UseStaticFiles();
 
             app.UseServices(services =>
@@ -25,15 +29,18 @@ namespace vNextAdmin
                 //Configure DbContext
                 services.SetupOptions<DbContextOptions>(options =>
                 {
-                    options.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Code\Admin\vNextAdmin\db.mdf;Integrated Security=True;Connect Timeout=30");
+                    options.UseSqlServer(configuration.Get("Data:Azure:ConnectionString"));
                 });
 
                 // Add Identity services to the services container
                 services.AddIdentitySqlServer<AdminIdentityDbContext, IdentityUser>().AddAuthentication();
 
                 services.AddMvc();
+
             });
 
+            //Microsoft.Framework.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance<>
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = ClaimsIdentityOptions.DefaultAuthenticationType,
@@ -48,9 +55,14 @@ namespace vNextAdmin
                     defaults: new { controller = "Test", action = "Index" });
 
                 routes.MapRoute(
-                    name: "default",
-                    template: "{*url}",
-                    defaults: new { controller = "Generic", action = "Index" });
+                    "admin module route",
+                    "{module?}/{resource?}/{*urlParams}",
+                    new { controller = "Generic", action = "Index", module="Dashboard", resource=string.Empty });
+
+                //routes.MapRoute(
+                //    name: "default",
+                //    template: "{*url}",
+                //    defaults: new { controller = "Generic", action = "Index" });
             });
 
 

@@ -1,0 +1,11 @@
+﻿{
+    "Data": {
+        "Local": {
+            "ConnectionString": "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Code\\Admin\\vNextAdmin\\db.mdf;Integrated Security=True;Connect Timeout=30"
+        },
+        "Azure": { 
+            "ConnectionString": "Server=tcp:kdpk92kjta.database.windows.net,1433;Database=vNextAdmin_db;User ID=vNextAdmin_sa@kdpk92kjta;Password=vNext2013;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;"
+        }
+
+    }
+}

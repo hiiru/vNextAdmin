@@ -20,7 +20,9 @@ namespace vNextAdmin.Controllers
         [HttpGet("/login")]
         [AllowAnonymous]
         public IActionResult Login()
-        {  
+        {
+            if (Context.User != null && Context.User.Identity != null && Context.User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Generic");
             return View();
         }
 
@@ -41,7 +43,7 @@ namespace vNextAdmin.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Generic");
                         }
                     case SignInStatus.Failure:
                     default:
@@ -53,10 +55,12 @@ namespace vNextAdmin.Controllers
         }
 
         [Route("/logout")]
-        public IActionResult logOut()
+        public IActionResult LogOut()
         {
             SignInManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToRoute("/login");
         }
+
+
     }
 }
